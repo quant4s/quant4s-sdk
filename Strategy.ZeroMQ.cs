@@ -18,7 +18,12 @@ namespace Quant4s_sdk
 	/// </summary>
 	public partial class Strategy
 	{
-		
+		/// <summary>
+        /// 监控成交回报
+        /// </summary>
+        protected void monitorReport() {
+        	// 启动成交回报监控线程
+        }
 		
 		private void monitorZeroMQ(String topic, Action<String> callback) {
 			if(callback == null) {
@@ -26,13 +31,8 @@ namespace Quant4s_sdk
 			}
 			
 			Thread t = new Thread(new ThreadStart(new MonitorData(topic, callback).run));
-			t.Start();
-			
+			t.Start();			
 		}
-		
-//		private void runMonitorMQThread(String topic, Action<String> callback) {
-//			Thread t = new Thread(new ThreadStart(new MonitorData(topic).run));
-//		}
 		
 		private class MonitorData {
 			private const String connect_to = "tcp://127.0.0.1:8089";
@@ -52,9 +52,7 @@ namespace Quant4s_sdk
 						var replyFrames = (System.Collections.Generic.List<ZFrame>)subscriber.ReceiveFrames(2);
 						var replyFrame = replyFrames[1];
 						string reply = replyFrame.ReadString();
-						if(callback != null)
-							callback.Invoke(topic +  ": " + reply);
-						
+						callback.Invoke(topic +  ": " + reply);						
 					}
 				}			
 			}

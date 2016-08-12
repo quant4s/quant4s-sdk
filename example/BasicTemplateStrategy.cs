@@ -31,6 +31,7 @@ namespace Quant4s_sdk.example
 		
 		private void OnData_000001(String data) {
 			Console.WriteLine("自定义接收方法" + data);
+			Buy("000001.XSHE", 100, 10);
 		}
 		
 		private void OnData_000002_TICK(string data) {
