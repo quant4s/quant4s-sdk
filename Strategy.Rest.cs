@@ -42,7 +42,7 @@ namespace Quant4s_sdk
         }
         
         private void _cancelOrder(CancelOrder order) {
-        	string url = restOrderBaseUrl + "/" + this.Id + "-" + order.Id;
+        	string url = restOrderBaseUrl + "/" + this.Id + "-" + order.orderNo;
         	rest.Delete(url);
         }
         

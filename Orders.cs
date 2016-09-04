@@ -16,23 +16,43 @@ namespace Quant4s_sdk
 	/// </summary>
 	public class Order
 	{
-		public Order()
-		{
+		public Order(int orderNo) {
+			this.orderNo = orderNo;
+		}
+		public int orderNo {get; private set;}
+		public int tradeAccountId {get; set;}
+		
+		public static LimitOrder createLimitOrder(int orderNo, string symbol, float price, int quantity, int side) {
+			return new LimitOrder(orderNo) {
+				price = price,
+				symbol = symbol,
+				quantity = quantity,
+				side = side,
+			};
 		}
 	}
 	
 	public class LimitOrder : Order {
-		public float Price {get;set;}
-		public int Quantity {get;set;}
+		public LimitOrder(int orderNo) : base(orderNo) {
+		}
+		public float price {get;set;}
+		public int quantity {get;set;}
 		public string symbol {get; set;}
-		public int Id {get;set;}
+		public int orderType { get {return 0;}}
+		public int orderStatus { get {return 0;}}
+		public int side { get; set;}
+		public string openClose {get {return "";}}
+
 	}
 	
 	public class CancelOrder : Order {
-		public int Id {get;set;}
+		public CancelOrder(int orderNo) : base(orderNo) {
+		}
 	}
 	
 	public class MarketOrder : Order {
+		public MarketOrder(int orderNo) : base(orderNo) {
+		}
 		
 	}
 }

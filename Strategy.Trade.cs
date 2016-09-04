@@ -15,20 +15,51 @@ namespace Quant4s_sdk
 	/// </summary>
 	public partial class Strategy
 	{
-		public void Buy(String symbol, int quantity, float price) {
+		
+		private const int BUY = 1;
+		private const int SELL = 2;
+		
+		private int _createOrderNo() {
+			return 1;
+		}
+		public int Buy(String symbol, int quantity, float price, int tradeAccountId = 1) {
+			int orderNo = _createOrderNo();
+			var order = Order.createLimitOrder(orderNo,  symbol, price, quantity, BUY);
+			order.tradeAccountId = tradeAccountId;
+			
+			_limitOrder(order);
+			
+			return orderNo;
+		}
+		
+		
+		public int Buy(String symbol, int quantity) {
+			int orderNo = _createOrderNo();
+//			var order = Order.createMarketOrder(1,
+//			_marketOrder(order);
+			return orderNo;
+		}
+		
+		public int Sell(String symbol, int quantity, float price, int tradeAccountId = 1) {
+			int orderNo = _createOrderNo();
+			var order = Order.createLimitOrder(orderNo,  symbol, price, quantity, SELL);
+			order.tradeAccountId = tradeAccountId;
+			
+			_limitOrder(order);
+			
+			return orderNo;
 			
 		}
 		
-		public void Buy(String symbol, int quantity) {
-			
+		public int Sell(String symbol, int quantity) {
+			int orderNo = _createOrderNo();
+
+			return orderNo;
+		
 		}
 		
-		public void Sell(String symbol, int quantity, float price) {
-			
-		}
-		
-		public void Sell(String symbol, int quantity) {
-			
+		public void Cancel(int orderNo) {
+			_cancelOrder(new CancelOrder(orderNo));
 		}
 		
 		/// <summary>
