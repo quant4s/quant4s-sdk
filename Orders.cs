@@ -46,6 +46,7 @@ namespace Quant4s_sdk
 	}
 	
 	public class CancelOrder : Order {
+		public int cancelOrderNo {get;set;}
 		public CancelOrder(int orderNo) : base(orderNo) {
 		}
 	}
