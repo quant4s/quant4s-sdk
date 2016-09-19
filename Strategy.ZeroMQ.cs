@@ -52,7 +52,7 @@ namespace Quant4s_sdk
 						var replyFrames = (System.Collections.Generic.List<ZFrame>)subscriber.ReceiveFrames(2);
 						var replyFrame = replyFrames[1];
 						string reply = replyFrame.ReadString();
-						callback.Invoke(topic +  ": " + reply);						
+						callback.Invoke(reply);						
 					}
 				}			
 			}

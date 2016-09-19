@@ -25,6 +25,14 @@ namespace Quant4s_sdk
 		public List<string> FilterByIndexCode(String ic) {
 			return null;
 		}
+		
+		public virtual void SetStockPool() {
+			
+		}
+		public void SetStockRange() {
+			// 1. 分类代码
+			// 2.
+		}
 
 	}
 	

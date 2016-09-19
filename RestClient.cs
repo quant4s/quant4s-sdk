@@ -35,9 +35,8 @@ namespace Quant4s_sdk
 		}
 		
 
-		public String Put(String url, String data) {
-			return client.Put(url, data, "application/json");
-			
+		public String Put(String url, String data = "") {
+			return client.Put(url, data, "application/json");		
 		}
 	}
 }

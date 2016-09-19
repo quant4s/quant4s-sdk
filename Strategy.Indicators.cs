@@ -15,11 +15,10 @@ namespace Quant4s_sdk
 		
 		public void MACD(String symbol, int fastPeriod, int slowPeriod, int signalPeriod, int period, Action<String> callback) {
 			string param = String.Format("{0}~{1}~{2}", fastPeriod, slowPeriod, signalPeriod);
-			string data = string.Format("{0},MACD,{1},{2}", symbol, 5, param);
+			string data = string.Format("{0},MACD,{1},{2}", symbol, period, param);
 			
-			_subscribeData(data);
-			
-           	monitorZeroMQ(data, callback);
+			_subscribeData(data, callback);			
+           	// monitorZeroMQ(data, callback);
 		}
 	}
 }

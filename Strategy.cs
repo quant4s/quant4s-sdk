@@ -35,11 +35,16 @@ namespace Quant4s_sdk
 			Initialize();
 		}
 
-        private void _SubmitStrategy() {
-        	
+        protected void AddBlankListRiskRule(String rule) {
+        	_addRiskRule("BlankListRisk", rule);
         }
-        
 		
+        protected bool RiskControlEnabled {
+        	set {
+        		if(value) _enableRiskControl();
+        		else _disableRiskControl();
+        	}
+        }
         protected void Run()
         {
             // 像招财云，订阅数据
@@ -61,8 +66,8 @@ namespace Quant4s_sdk
 		/// <param name="Period"></param>
 		protected void Subscribe(String symbol, int Period, Action<String> callback = null) {
 			var req = String.Format("{0},BAR,{1}", symbol, Period);
-            _subscribeData(req);
-           monitorZeroMQ(req, callback);
+            _subscribeData(req, callback);
+           //monitorZeroMQ(req, callback);
         }
 		
 		private void onData(String data) {
@@ -75,8 +80,8 @@ namespace Quant4s_sdk
 		/// <param name="symbol"></param>
 		protected void Subscribe(String symbol, Action<String> callback = null) {
 			var req = String.Format("{0},TICK", symbol);
-            _subscribeData(req);
-           	monitorZeroMQ(req, callback);
+            _subscribeData(req, callback);
+          // 	monitorZeroMQ(req, callback);
 		}
 
         protected void SubscribeIndicator(String symbol, int period, String name, Action<String> callback)
@@ -89,5 +94,11 @@ namespace Quant4s_sdk
 		protected virtual void OnData(Slice data) {
 			
 		}
+
+		public void Close()
+		{
+			_stop();
+		}
+
 	}
 }

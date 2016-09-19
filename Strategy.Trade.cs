@@ -60,7 +60,7 @@ namespace Quant4s_sdk
 		
 		public int Cancel( int cancelOrderNo, int tradeAccountId = 1) {
 			int orderNo = 2;// _createOrderNo();
-			var order = new CancelOrder(orderNo) {cancelOrderNo = cancelOrderNo, tradeAccountId = tradeAccountId)};
+			var order = new CancelOrder(orderNo) {cancelOrderNo = cancelOrderNo, tradeAccountId = tradeAccountId};
 			_cancelOrder(order);
 			
 			return orderNo;
